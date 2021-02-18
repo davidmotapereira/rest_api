@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('/works', function () {
-    return ['status' => true];
+Route::namespace('API')->name('api.')->group(function () {
+    Route::get('/cars', [CarController::class, 'index'])->name('cars');
+    Route::get('/cars/{id}', [CarController::class, 'show'])->name('single_car');
 });
+
+
+// Route::get('/works', function () {
+//     return ['status' => true];
+// });
